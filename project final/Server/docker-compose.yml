@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  server:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - MODEL_FILE=model.pkl
+      - SCALER_FILE=scaler.pkl
+      - KEY_PATH=./keys
