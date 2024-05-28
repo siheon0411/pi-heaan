@@ -25,3 +25,5 @@ We generated models by multiple ML algorithms
 
 ### 3. project final
 Generating model after encrypting the data with homomorphic encryption
+
+- We chose to preprocess data and generate 'Logistic Regression Model' with homomorphic encrypting data.
