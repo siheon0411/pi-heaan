@@ -6,7 +6,8 @@
     <title>Logistic Regression Prediction</title>
 </head>
 <body>
-    <h1>Logistic Regression Prediction</h1>
+    <h1>Korean Medical Bodytype Logistic Regression Prediction</h1>
+    <h3> Made by ITM Siheon Kim & Jungmin Oh</h3>
     <form id="predictForm">
         <div>
             <label for="bmi">BMI (kg/m^2):</label>
@@ -200,6 +201,7 @@
         <button type="button" onclick="predict()">Predict</button>
     </form>
     <div id="result"></div>
+    <div id="time"></div>
 
     <script>
         function predict() {
@@ -219,6 +221,7 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById("result").innerHTML = `<h2>Prediction: ${data.prediction}</h2>`;
+                document.getElementById("time").innerHTML = `<h2>Execution time: ${data.execution_time}</h2>`;
             })
             .catch(error => {
                 console.error("Error:", error);
