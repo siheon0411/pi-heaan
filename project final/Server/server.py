@@ -261,7 +261,6 @@ class Data(BaseModel):
     urinenighttime_urination: int
 
 @app.post("/predict")
-
 # get input and predict class through model
 def predict(data: Data):
     try:
