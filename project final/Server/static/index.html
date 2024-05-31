@@ -4,204 +4,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logistic Regression Prediction</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .left {
+            flex: 1;
+            padding: 20px;
+        }
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Korean Medical Bodytype Logistic Regression Prediction</h1>
-    <h3> Made by ITM Siheon Kim & Jungmin Oh</h3>
-    <form id="predictForm">
-        <div>
-            <label for="bmi">BMI (kg/m^2):</label>
-            <input type="number" step="0.01" id="bmi" name="bmi" required>
-        </div>
-        <div>
-            <label for="forehead_circumference">Forehead circumference (cm):</label>
-            <input type="number" step="0.01" id="forehead_circumference" name="forehead_circumference" required>
-        </div>
-        <div>
-            <label for="neck_circumference">Neck circumference (cm):</label>
-            <input type="number" step="0.01" id="neck_circumference" name="neck_circumference" required>
-        </div>
-        <div>
-            <label for="armpit_circumference">Armpit circumference (cm):</label>
-            <input type="number" step="0.01" id="armpit_circumference" name="armpit_circumference" required>
-        </div>
-        <div>
-            <label for="bust">Bust (cm):</label>
-            <input type="number" step="0.01" id="bust" name="bust" required>
-        </div>
-        <div>
-            <label for="rib_cage">Rib cage (cm):</label>
-            <input type="number" step="0.01" id="rib_cage" name="rib_cage" required>
-        </div>
-        <div>
-            <label for="waist_circumference">Waist circumference (cm):</label>
-            <input type="number" step="0.01" id="waist_circumference" name="waist_circumference" required>
-        </div>
-        <div>
-            <label for="iliac_circumference">Iliac circumference (cm):</label>
-            <input type="number" step="0.01" id="iliac_circumference" name="iliac_circumference" required>
-        </div>
-        <div>
-            <label for="femur_circumference">Femur circumference (cm):</label>
-            <input type="number" step="0.01" id="femur_circumference" name="femur_circumference" required>
-        </div>
-        <div>
-            <label for="urinenighttime_urination">Urine Nighttime urination:</label>
-            <input type="number" step="0.01" id="urinenighttime_urination" name="urinenighttime_urination" required>
-        </div>
+    <div class="left">
+        <h1>Korean Medical Bodytype Logistic Regression Prediction</h1>
+        <h3> Made by ITM Siheon Kim & Jungmin Oh</h3>
+        <form id="predictForm">
+            <div>
+                <label for="bmi">BMI (kg/m^2):</label>
+                <input type="number" step="0.01" id="bmi" name="bmi" required>
+            </div>
+            <div>
+                <label for="forehead_circumference">Forehead circumference (cm):</label>
+                <input type="number" step="0.01" id="forehead_circumference" name="forehead_circumference" required>
+            </div>
+            <div>
+                <label for="neck_circumference">Neck circumference (cm):</label>
+                <input type="number" step="0.01" id="neck_circumference" name="neck_circumference" required>
+            </div>
+            <div>
+                <label for="armpit_circumference">Armpit circumference (cm):</label>
+                <input type="number" step="0.01" id="armpit_circumference" name="armpit_circumference" required>
+            </div>
+            <div>
+                <label for="bust">Bust (cm):</label>
+                <input type="number" step="0.01" id="bust" name="bust" required>
+            </div>
+            <div>
+                <label for="rib_cage">Rib cage (cm):</label>
+                <input type="number" step="0.01" id="rib_cage" name="rib_cage" required>
+            </div>
+            <div>
+                <label for="waist_circumference">Waist circumference (cm):</label>
+                <input type="number" step="0.01" id="waist_circumference" name="waist_circumference" required>
+            </div>
+            <div>
+                <label for="iliac_circumference">Iliac circumference (cm):</label>
+                <input type="number" step="0.01" id="iliac_circumference" name="iliac_circumference" required>
+            </div>
+            <div>
+                <label for="femur_circumference">Femur circumference (cm):</label>
+                <input type="number" step="0.01" id="femur_circumference" name="femur_circumference" required>
+            </div>
+            <div>
+                <label for="urinenighttime_urination">Urine Nighttime urination:</label>
+                <input type="number" step="0.01" id="urinenighttime_urination" name="urinenighttime_urination" required>
+            </div>
 
-        <!-- Categorical fields -->
-        <div>
-            <label>Personality BS:</label>
-            <input type="radio" id="personality_bs_0" name="personality_bs" value="0" required>
-            <label for="personality_bs_0">0</label>
-            <input type="radio" id="personality_bs_1" name="personality_bs" value="1" required>
-            <label for="personality_bs_1">1</label>
-        </div>
-        <div>
-            <label>Personality FASA:</label>
-            <input type="radio" id="personality_fasa_0" name="personality_fasa" value="0" required>
-            <label for="personality_fasa_0">0</label>
-            <input type="radio" id="personality_fasa_1" name="personality_fasa" value="1" required>
-            <label for="personality_fasa_1">1</label>
-        </div>
-        <div>
-            <label>Personality AP:</label>
-            <input type="radio" id="personality_ap_0" name="personality_ap" value="0" required>
-            <label for="personality_ap_0">0</label>
-            <input type="radio" id="personality_ap_1" name="personality_ap" value="1" required>
-            <label for="personality_ap_1">1</label>
-        </div>
-        <div>
-            <label>Personality DI:</label>
-            <input type="radio" id="personality_di_0" name="personality_di" value="0" required>
-            <label for="personality_di_0">0</label>
-            <input type="radio" id="personality_di_1" name="personality_di" value="1" required>
-            <label for="personality_di_1">1</label>
-        </div>
-        <div>
-            <label>Personality FGSG:</label>
-            <input type="radio" id="personality_fgsg_0" name="personality_fgsg" value="0" required>
-            <label for="personality_fgsg_0">0</label>
-            <input type="radio" id="personality_fgsg_1" name="personality_fgsg" value="1" required>
-            <label for="personality_fgsg_1">1</label>
-        </div>
-        <div>
-            <label>Personality EI:</label>
-            <input type="radio" id="personality_ei_0" name="personality_ei" value="0" required>
-            <label for="personality_ei_0">0</label>
-            <input type="radio" id="personality_ei_1" name="personality_ei" value="1" required>
-            <label for="personality_ei_1">1</label>
-        </div>
-        <div>
-            <label>Personality DS:</label>
-            <input type="radio" id="personality_ds_0" name="personality_ds" value="0" required>
-            <label for="personality_ds_0">0</label>
-            <input type="radio" id="personality_ds_1" name="personality_ds" value="1" required>
-            <label for="personality_ds_1">1</label>
-        </div>
-        <div>
-            <label>Personality ED:</label>
-            <input type="radio" id="personality_ed_0" name="personality_ed" value="0" required>
-            <label for="personality_ed_0">0</label>
-            <input type="radio" id="personality_ed_1" name="personality_ed" value="1" required>
-            <label for="personality_ed_1">1</label>
-        </div>
-        <div>
-            <label>Personality MF:</label>
-            <input type="radio" id="personality_mf_0" name="personality_mf" value="0" required>
-            <label for="personality_mf_0">0</label>
-            <input type="radio" id="personality_mf_1" name="personality_mf" value="1" required>
-            <label for="personality_mf_1">1</label>
-        </div>
-        <div>
-            <label>Personality IFTE:</label>
-            <input type="radio" id="personality_ifte_0" name="personality_ifte" value="0" required>
-            <label for="personality_ifte_0">0</label>
-            <input type="radio" id="personality_ifte_1" name="personality_ifte" value="1" required>
-            <label for="personality_ifte_1">1</label>
-        </div>
-        <div>
-            <label>Personality BL:</label>
-            <input type="radio" id="personality_bl_0" name="personality_bl" value="0" required>
-            <label for="personality_bl_0">0</label>
-            <input type="radio" id="personality_bl_1" name="personality_bl" value="1" required>
-            <label for="personality_bl_1">1</label>
-        </div>
-        <div>
-            <label>Personality ES:</label>
-            <input type="radio" id="personality_es_0" name="personality_es" value="0" required>
-            <label for="personality_es_0">0</label>
-            <input type="radio" id="personality_es_1" name="personality_es" value="1" required>
-            <label for="personality_es_1">1</label>
-        </div>
-        <div>
-            <label>Personality EE:</label>
-            <input type="radio" id="personality_ee_0" name="personality_ee" value="0" required>
-            <label for="personality_ee_0">0</label>
-            <input type="radio" id="personality_ee_1" name="personality_ee" value="1" required>
-            <label for="personality_ee_1">1</label>
-        </div>
-        <div>
-            <label>Personality OXR:</label>
-            <input type="radio" id="personality_oxr_0" name="personality_oxr" value="0" required>
-            <label for="personality_oxr_0">0</label>
-            <input type="radio" id="personality_oxr_1" name="personality_oxr" value="1" required>
-            <label for="personality_oxr_1">1</label>
-        </div>
-        <div>
-            <label>Personality PO:</label>
-            <input type="radio" id="personality_po_0" name="personality_po" value="0" required>
-            <label for="personality_po_0">0</label>
-            <input type="radio" id="personality_po_1" name="personality_po" value="1" required>
-            <label for="personality_po_1">1</label>
-        </div>
-        <div>
-            <label>Sweating:</label>
-            <input type="radio" id="sweating_0" name="sweating" value="0" required>
-            <label for="sweating_0">0</label>
-            <input type="radio" id="sweating_1" name="sweating" value="1" required>
-            <label for="sweating_1">1</label>
-        </div>
-        <div>
-            <label>SweatMood:</label>
-            <input type="radio" id="sweatmood_0" name="sweatmood" value="0" required>
-            <label for="sweatmood_0">0</label>
-            <input type="radio" id="sweatmood_1" name="sweatmood" value="1" required>
-            <label for="sweatmood_1">1</label>
-        </div>
-        <div>
-            <label>StoolHabits:</label>
-            <input type="radio" id="stoolhabits_0" name="stoolhabits" value="0" required>
-            <label for="stoolhabits_0">0</label>
-            <input type="radio" id="stoolhabits_1" name="stoolhabits" value="1" required>
-            <label for="stoolhabits_1">1</label>
-        </div>
-        <div>
-            <label>Fecal_Bulge:</label>
-            <input type="radio" id="fecal_bulge_0" name="fecal_bulge" value="0" required>
-            <label for="fecal_bulge_0">0</label>
-            <input type="radio" id="fecal_bulge_1" name="fecal_bulge" value="1" required>
-            <label for="fecal_bulge_1">1</label>
-        </div>
-        <div>
-            <label>Feeling of urgency when defecating:</label>
-            <input type="radio" id="fouw_defecating_0" name="fouw_defecating" value="0" required>
-            <label for="fouw_defecating_0">0</label>
-            <input type="radio" id="fouw_defecating_1" name="fouw_defecating" value="1" required>
-            <label for="fouw_defecating_1">1</label>
-        </div>
-        <div>
-            <label>Feeling of loose stools after defecation:</label>
-            <input type="radio" id="folsa_defecation_0" name="folsa_defecation" value="0" required>
-            <label for="folsa_defecation_0">0</label>
-            <input type="radio" id="folsa_defecation_1" name="folsa_defecation" value="1" required>
-            <label for="folsa_defecation_1">1</label>
-        </div>
-        <button type="button" onclick="predict()">Predict</button>
-    </form>
-    <div id="result"></div>
-    <div id="time"></div>
+            <!-- Categorical fields -->
+            <div>
+                <label>Personality BS:</label>
+                <input type="radio" id="personality_bs_0" name="personality_bs" value="0" required>
+                <label for="personality_bs_0">0</label>
+                <input type="radio" id="personality_bs_1" name="personality_bs" value="1" required>
+                <label for="personality_bs_1">1</label>
+            </div>
+            <div>
+                <label>Personality FASA:</label>
+                <input type="radio" id="personality_fasa_0" name="personality_fasa" value="0" required>
+                <label for="personality_fasa_0">0</label>
+                <input type="radio" id="personality_fasa_1" name="personality_fasa" value="1" required>
+                <label for="personality_fasa_1">1</label>
+            </div>
+            <div>
+                <label>Personality AP:</label>
+                <input type="radio" id="personality_ap_0" name="personality_ap" value="0" required>
+                <label for="personality_ap_0">0</label>
+                <input type="radio" id="personality_ap_1" name="personality_ap" value="1" required>
+                <label for="personality_ap_1">1</label>
+            </div>
+            <div>
+                <label>Personality DI:</label>
+                <input type="radio" id="personality_di_0" name="personality_di" value="0" required>
+                <label for="personality_di_0">0</label>
+                <input type="radio" id="personality_di_1" name="personality_di" value="1" required>
+                <label for="personality_di_1">1</label>
+            </div>
+            <div>
+                <label>Personality FGSG:</label>
+                <input type="radio" id="personality_fgsg_0" name="personality_fgsg" value="0" required>
+                <label for="personality_fgsg_0">0</label>
+                <input type="radio" id="personality_fgsg_1" name="personality_fgsg" value="1" required>
+                <label for="personality_fgsg_1">1</label>
+            </div>
+            <div>
+                <label>Personality EI:</label>
+                <input type="radio" id="personality_ei_0" name="personality_ei" value="0" required>
+                <label for="personality_ei_0">0</label>
+                <input type="radio" id="personality_ei_1" name="personality_ei" value="1" required>
+                <label for="personality_ei_1">1</label>
+            </div>
+            <div>
+                <label>Personality DS:</label>
+                <input type="radio" id="personality_ds_0" name="personality_ds" value="0" required>
+                <label for="personality_ds_0">0</label>
+                <input type="radio" id="personality_ds_1" name="personality_ds" value="1" required>
+                <label for="personality_ds_1">1</label>
+            </div>
+            <div>
+                <label>Personality ED:</label>
+                <input type="radio" id="personality_ed_0" name="personality_ed" value="0" required>
+                <label for="personality_ed_0">0</label>
+                <input type="radio" id="personality_ed_1" name="personality_ed" value="1" required>
+                <label for="personality_ed_1">1</label>
+            </div>
+            <div>
+                <label>Personality MF:</label>
+                <input type="radio" id="personality_mf_0" name="personality_mf" value="0" required>
+                <label for="personality_mf_0">0</label>
+                <input type="radio" id="personality_mf_1" name="personality_mf" value="1" required>
+                <label for="personality_mf_1">1</label>
+            </div>
+            <div>
+                <label>Personality IFTE:</label>
+                <input type="radio" id="personality_ifte_0" name="personality_ifte" value="0" required>
+                <label for="personality_ifte_0">0</label>
+                <input type="radio" id="personality_ifte_1" name="personality_ifte" value="1" required>
+                <label for="personality_ifte_1">1</label>
+            </div>
+            <div>
+                <label>Personality BL:</label>
+                <input type="radio" id="personality_bl_0" name="personality_bl" value="0" required>
+                <label for="personality_bl_0">0</label>
+                <input type="radio" id="personality_bl_1" name="personality_bl" value="1" required>
+                <label for="personality_bl_1">1</label>
+            </div>
+            <div>
+                <label>Personality ES:</label>
+                <input type="radio" id="personality_es_0" name="personality_es" value="0" required>
+                <label for="personality_es_0">0</label>
+                <input type="radio" id="personality_es_1" name="personality_es" value="1" required>
+                <label for="personality_es_1">1</label>
+            </div>
+            <div>
+                <label>Personality EE:</label>
+                <input type="radio" id="personality_ee_0" name="personality_ee" value="0" required>
+                <label for="personality_ee_0">0</label>
+                <input type="radio" id="personality_ee_1" name="personality_ee" value="1" required>
+                <label for="personality_ee_1">1</label>
+            </div>
+            <div>
+                <label>Personality OXR:</label>
+                <input type="radio" id="personality_oxr_0" name="personality_oxr" value="0" required>
+                <label for="personality_oxr_0">0</label>
+                <input type="radio" id="personality_oxr_1" name="personality_oxr" value="1" required>
+                <label for="personality_oxr_1">1</label>
+            </div>
+            <div>
+                <label>Personality PO:</label>
+                <input type="radio" id="personality_po_0" name="personality_po" value="0" required>
+                <label for="personality_po_0">0</label>
+                <input type="radio" id="personality_po_1" name="personality_po" value="1" required>
+                <label for="personality_po_1">1</label>
+            </div>
+            <div>
+                <label>Sweating:</label>
+                <input type="radio" id="sweating_0" name="sweating" value="0" required>
+                <label for="sweating_0">0</label>
+                <input type="radio" id="sweating_1" name="sweating" value="1" required>
+                <label for="sweating_1">1</label>
+            </div>
+            <div>
+                <label>SweatMood:</label>
+                <input type="radio" id="sweatmood_0" name="sweatmood" value="0" required>
+                <label for="sweatmood_0">0</label>
+                <input type="radio" id="sweatmood_1" name="sweatmood" value="1" required>
+                <label for="sweatmood_1">1</label>
+            </div>
+            <div>
+                <label>StoolHabits:</label>
+                <input type="radio" id="stoolhabits_0" name="stoolhabits" value="0" required>
+                <label for="stoolhabits_0">0</label>
+                <input type="radio" id="stoolhabits_1" name="stoolhabits" value="1" required>
+                <label for="stoolhabits_1">1</label>
+            </div>
+            <div>
+                <label>Fecal_Bulge:</label>
+                <input type="radio" id="fecal_bulge_0" name="fecal_bulge" value="0" required>
+                <label for="fecal_bulge_0">0</label>
+                <input type="radio" id="fecal_bulge_1" name="fecal_bulge" value="1" required>
+                <label for="fecal_bulge_1">1</label>
+            </div>
+            <div>
+                <label>Feeling of urgency when defecating:</label>
+                <input type="radio" id="fouw_defecating_0" name="fouw_defecating" value="0" required>
+                <label for="fouw_defecating_0">0</label>
+                <input type="radio" id="fouw_defecating_1" name="fouw_defecating" value="1" required>
+                <label for="fouw_defecating_1">1</label>
+            </div>
+            <div>
+                <label>Feeling of loose stools after defecation:</label>
+                <input type="radio" id="folsa_defecation_0" name="folsa_defecation" value="0" required>
+                <label for="folsa_defecation_0">0</label>
+                <input type="radio" id="folsa_defecation_1" name="folsa_defecation" value="1" required>
+                <label for="folsa_defecation_1">1</label>
+            </div>
+            <button type="button" onclick="predict()">Predict</button>
+        </form>
+        <div id="result"></div>
+        <div id="time"></div>
+    </div>
+    <div class="right">
+        <img src="/static/guide_image.png" alt="Your Image">
+    </div>
 
     <script>
         function predict() {
